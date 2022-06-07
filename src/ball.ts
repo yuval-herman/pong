@@ -1,4 +1,4 @@
-import { box, isBetween, isInside } from "./helpers";
+import { Box, isBetween, isInside } from "./helpers";
 import { objTypes, Renderer as Renderer } from "./renderer";
 import { vector } from "./vector";
 
@@ -6,9 +6,9 @@ export class Ball {
 	private _position: vector;
 	renderer: Renderer;
 	dirForce: vector;
-	box: [vector, vector];
+	box: Box;
 	radius: number;
-	constructor(position: vector, box: box, renderer: Renderer) {
+	constructor(position: vector, box: Box, renderer: Renderer) {
 		this._position = position;
 		this.dirForce = new vector(0, 0);
 		this.renderer = renderer;
