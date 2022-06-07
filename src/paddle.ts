@@ -28,6 +28,7 @@ export class Paddle {
     this.renderer = renderer;
     this.renderer.make(this.name, objTypes.paddle, height, width);
     this.renderer.move(this.name, this._position);
+    console.log(this._position, this.height, this.width);
   }
 
   public get position(): vector {
@@ -66,7 +67,10 @@ export class Paddle {
       )
     )
       return false;
+    if (isLeft) console.log(pos.x, this.position.x);
 
+    // console.log(pos.x < this.position.x + this.width);
+    // console.log(isLeft && pos.x < this.position.x + this.width);
     if (isLeft && pos.x < this.position.x + this.width) return true;
     else if (!isLeft && pos.x > this.position.x - this.width / 2) return true;
 

@@ -24,6 +24,7 @@ export class Ball {
   public set position(v: vector) {
     this._position = v;
     this.renderer.move("ball", this._position);
+    // console.log(this._position);
   }
 
   moveByForce(dirForce: vector = this.dirForce) {
