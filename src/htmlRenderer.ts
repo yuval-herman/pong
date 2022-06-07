@@ -3,77 +3,76 @@ import { objTypes, Renderer } from "./renderer";
 import { vector } from "./vector";
 
 type element = {
-	name: string;
-	type: objTypes;
-	html: HTMLElement;
+  name: string;
+  type: objTypes;
+  html: HTMLElement;
 };
 
 export class HTMLRenderer implements Renderer {
-	map = new Map<string, element>();
-	intervalId: number = 0;
-	htmlSpace = document.body;
-	units = "vh";
+  map = new Map<string, element>();
+  intervalId = 0;
+  htmlSpace = document.body;
+  units = "vh";
 
-	constructor() {
-		this.htmlSpace.style.height = "100vh";
-	}
+  constructor() {
+    this.htmlSpace.style.height = "100vh";
+  }
 
-	make(name: string, type: objTypes, height: number, width: number): void {
-		console.log("make", name, type, height, width);
-		let htmlElement: HTMLElement;
+  make(name: string, type: objTypes, height: number, width: number): void {
+    let htmlElement: HTMLElement;
 
-		if (type === objTypes.ball) htmlElement = this.makeBall(height, width);
-		else htmlElement = this.makePaddle(height, width);
+    if (type === objTypes.ball) htmlElement = this.makeBall(height, width);
+    else htmlElement = this.makePaddle(height, width);
 
-		this.map.set(name, {
-			name: name,
-			type: type,
-			html: htmlElement,
-		}); // no check for same name elements TODO FIXME
+    this.map.set(name, {
+      name: name,
+      type: type,
+      html: htmlElement,
+    }); // no check for same name elements TODO FIXME
 
-		this.htmlSpace.appendChild(htmlElement);
-	}
-	move(name: string, position: vector): void {
-		console.log("move", name, position);
+    this.htmlSpace.appendChild(htmlElement);
+  }
+  move(name: string, position: vector): void {
+    const obj = this.map.get(name);
+    const elem = obj?.html;
 
-		const elem = this.map.get(name)?.html;
-		elem!.style.top = position.y + this.units;
-		elem!.style.left = position.x + this.units;
-	}
-	setInterval(fn: Function, ms: number) {
-		this.intervalId = setInterval(fn, ms);
-	}
-	stopInterval() {
-		clearInterval(this.intervalId);
-	}
+    elem!.style.top = position.y + this.units;
+    elem!.style.left = position.x + this.units;
+  }
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  setInterval(fn: Function, ms: number) {
+    this.intervalId = setInterval(fn, ms);
+  }
+  stopInterval() {
+    clearInterval(this.intervalId);
+  }
 
-	getField(): Box {
-		return [
-			new vector(0, 0),
-			new vector(
-				this.htmlSpace.offsetWidth,
-				this.htmlSpace.offsetHeight
-			).div(10),
-		];
-	}
+  getField(): Box {
+    return [
+      new vector(0, 0),
+      new vector(this.htmlSpace.offsetWidth, this.htmlSpace.offsetHeight).div(
+        10
+      ),
+    ];
+  }
 
-	makeBall(height: number, width: number): HTMLElement {
-		const elem = document.createElement("div");
-		elem.style.backgroundColor = "white";
-		elem.style.position = "absolute";
-		elem.style.borderRadius = "50%";
-		elem.style.height = height + this.units;
-		elem.style.width = width + this.units;
-		return elem;
-	}
+  makeBall(height: number, width: number): HTMLElement {
+    const elem = document.createElement("div");
+    elem.style.backgroundColor = "white";
+    elem.style.position = "absolute";
+    elem.style.borderRadius = "50%";
+    elem.style.height = height + this.units;
+    elem.style.width = width + this.units;
+    return elem;
+  }
 
-	makePaddle(height: number, width: number): HTMLElement {
-		const elem = document.createElement("div");
-		elem.style.backgroundColor = "white";
-		elem.style.position = "absolute";
-		elem.style.borderRadius = "2%";
-		elem.style.height = height + this.units;
-		elem.style.width = width + this.units;
-		return elem;
-	}
+  makePaddle(height: number, width: number): HTMLElement {
+    const elem = document.createElement("div");
+    elem.style.backgroundColor = "white";
+    elem.style.position = "absolute";
+    elem.style.borderRadius = "2%";
+    elem.style.height = height + this.units;
+    elem.style.width = width + this.units;
+    return elem;
+  }
 }

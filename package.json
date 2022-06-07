@@ -3,7 +3,7 @@
   "scripts": {
     "start": "gulp",
     "lint": "eslint ./src --ext .ts",
-    "jest": "jest",
+    "jest": "jest --watchAll --coverage --verbose",
     "lint-fix": "eslint ./src --ext .ts --fix"
   },
   "dependencies": {
