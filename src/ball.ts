@@ -27,16 +27,20 @@ export class Ball {
 	}
 
 	moveByForce(dirForce: vector = this.dirForce) {
+		this.dirForce = dirForce;
 		const newPos = this.position.add(dirForce);
 		if (isInside(newPos, this.box)) {
 			this.position = newPos;
-		} else this.handleCollision(newPos);
+		} else {
+			this.handleCollision(newPos);
+			this.moveByForce();
+		}
 	}
 
 	handleCollision(pos: vector = this.position) {
 		if (!isBetween(pos.x, this.box[0].x, this.box[1].x)) {
 			// collision in vertical axis
-			this.dirForce.x *= 1;
+			this.dirForce.x *= -1;
 		} else if (!isBetween(pos.y, this.box[0].y, this.box[1].y)) {
 			// collision in horizontal axis
 			this.dirForce.y *= -1;
