@@ -10,7 +10,7 @@ export class Ball {
 	radius: number;
 	constructor(position: vector, box: Box, renderer: Renderer) {
 		this._position = position;
-		this.dirForce = new vector(0, 0);
+		this.dirForce = new vector(1, 1);
 		this.renderer = renderer;
 		this.box = box;
 		this.radius = 1;
