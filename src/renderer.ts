@@ -1,3 +1,4 @@
+import { Box } from "./helpers";
 import { vector } from "./vector";
 
 export enum objTypes {
@@ -6,16 +7,21 @@ export enum objTypes {
 }
 
 export interface Renderer {
-	objects: Object;
+	map: Map<string, Object>;
 	make(name: string, type: objTypes, height: number, width: number): void;
 	move(name: string, position: vector): void;
 	setInterval(fn: Function, ms: number): void;
 	stopInterval(): void;
+	getField(): Box;
 }
 
 export class dummyRenderer implements Renderer {
-	objects: Object = {};
+	map: Map<string, Object>;
 	intervalId: number = 0;
+
+	constructor() {
+		this.map = new Map<string, Object>();
+	}
 	move(name: string, position: vector): void {
 		console.log("move", name, position);
 	}
@@ -27,5 +33,9 @@ export class dummyRenderer implements Renderer {
 	}
 	stopInterval() {
 		clearInterval(this.intervalId);
+	}
+
+	getField(): Box {
+		return [new vector(0, 0), new vector(100, 100)];
 	}
 }
