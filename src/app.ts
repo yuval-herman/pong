@@ -7,26 +7,77 @@ import { Box } from "./helpers";
 import { HTMLRenderer } from "./htmlRenderer";
 
 const renderer = new HTMLRenderer();
+
+// this will always be the same
 const field = renderer.getField();
 
 const ball = new Ball(field[1].div(2), field, renderer);
 const lPaddle = new Paddle(
-	new vector(0, field[1].y / 2),
-	5,
-	1,
+	new vector(3, field[1].y / 2),
+	10,
+	3,
 	3,
 	"lPaddle",
 	field,
 	renderer
 );
 const rPaddle = new Paddle(
-	new vector(field[1].x, field[1].y / 2),
-	5,
-	1,
+	new vector(field[1].x - 3, field[1].y / 2),
+	10,
+	3,
 	3,
 	"rPaddle",
 	field,
 	renderer
 );
 const game = new Game(ball, lPaddle, rPaddle, renderer);
+
+//this will not be the same
+
+window.addEventListener("keydown", (e) => {
+	switch (e.code) {
+		case "ArrowUp":
+			game.rPaddleMove = -1;
+			break;
+
+		case "ArrowDown":
+			game.rPaddleMove = 1;
+			break;
+
+		case "KeyW":
+			game.lPaddleMove = -1;
+			break;
+
+		case "KeyS":
+			game.lPaddleMove = 1;
+			break;
+
+		default:
+			break;
+	}
+});
+
+window.addEventListener("keyup", (e) => {
+	switch (e.code) {
+		case "ArrowUp":
+			game.rPaddleMove = 0;
+			break;
+
+		case "ArrowDown":
+			game.rPaddleMove = 0;
+			break;
+
+		case "KeyW":
+			game.lPaddleMove = 0;
+			break;
+
+		case "KeyS":
+			game.lPaddleMove = 0;
+			break;
+
+		default:
+			break;
+	}
+});
+
 game.start((1 / 60) * 1000);

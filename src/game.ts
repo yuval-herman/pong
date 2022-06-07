@@ -7,7 +7,9 @@ import { vector } from "./vector";
 export class Game {
 	ball: Ball;
 	lPaddle: Paddle;
+	lPaddleMove = 0;
 	rPaddle: Paddle;
+	rPaddleMove = 0;
 	renderer: Renderer;
 
 	constructor(
@@ -25,6 +27,8 @@ export class Game {
 	tick() {
 		this.handlePaddleCollision();
 		this.ball.tick();
+		this.lPaddle.moveY(this.lPaddleMove);
+		this.rPaddle.moveY(this.rPaddleMove);
 	}
 
 	computeBox(obj: { height: number; width: number; position: vector }): Box {
