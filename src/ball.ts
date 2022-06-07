@@ -32,7 +32,7 @@ export class Ball {
 		if (isInside(newPos, this.box)) {
 			this.position = newPos;
 		} else {
-			this.handleCollision(newPos);
+			if (this.handleCollision(newPos)) return;
 			this.moveByForce();
 		}
 	}
@@ -45,6 +45,7 @@ export class Ball {
 			// collision in horizontal axis
 			this.dirForce.y *= -1;
 		}
+		return true;
 	}
 
 	tick() {
