@@ -9,4 +9,8 @@ export class vector {
 	add(v: vector) {
 		return new vector(this.x + v.x, this.y + v.y);
 	}
+
+	div(num: number) {
+		return new vector(this.x / num, this.y / num);
+	}
 }
