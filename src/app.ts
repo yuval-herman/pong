@@ -4,9 +4,10 @@ import { Paddle } from "./paddle";
 import { dummyRenderer, objTypes, Renderer } from "./renderer";
 import { vector } from "./vector";
 import { Box } from "./helpers";
+import { HTMLRenderer } from "./htmlRenderer";
 
-const field: Box = [new vector(0, 0), new vector(100, 100)];
-const renderer = new dummyRenderer();
+const renderer = new HTMLRenderer();
+const field = renderer.getField();
 
 const ball = new Ball(field[1].div(2), field, renderer);
 const lPaddle = new Paddle(
