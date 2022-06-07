@@ -27,6 +27,7 @@ export class Paddle {
 		this.moveLimit = moveLimit;
 		this.renderer = renderer;
 		this.renderer.make(this.name, objTypes.paddle, height, width);
+		this.renderer.move(this.name, this._position);
 	}
 
 	public get position(): vector {
