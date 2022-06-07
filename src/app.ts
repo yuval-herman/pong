@@ -18,4 +18,4 @@ const ball = new Ball(
 	new dummyRenderer()
 );
 
-ball.moveByForce(new vector(1,1))
+ball.moveByForce(new vector(1, 1));
