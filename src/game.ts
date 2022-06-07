@@ -24,6 +24,7 @@ export class Game {
 
 	tick() {
 		this.handlePaddleCollision();
+		this.ball.tick();
 	}
 
 	computeBox(obj: { height: number; width: number; position: vector }): Box {
