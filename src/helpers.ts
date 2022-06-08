@@ -12,3 +12,7 @@ export function isInside(v: vector, box: Box): boolean {
 		// not in all cases TODO FIXME
 	);
 }
+
+export function shrinkBox(box: Box, by: number): Box {
+	return [box[0].add(by), box[1].sub(by)];
+}
