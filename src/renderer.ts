@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { Box } from "./helpers";
 import { vector } from "./vector";
 
@@ -8,7 +7,6 @@ export enum objTypes {
 }
 
 export interface Renderer {
-	// eslint-disable-next-line @typescript-eslint/ban-types
 	map: Map<string, Object>;
 	make(name: string, type: objTypes, height: number, width: number): void;
 	move(name: string, position: vector): void;

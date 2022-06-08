@@ -6,8 +6,7 @@ const box2: Box = [new vector(15, 15), new vector(5, 5)];
 const vec = new vector(4, 5);
 
 describe.only("Test helpers", () => {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  it("Test isInside method", () => {
-    expect(isInside(vec, box1)).toBe(false);
-  });
+	it("Test isInside method", () => {
+		expect(isInside(vec, box1)).toBe(false);
+	});
 });

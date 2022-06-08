@@ -39,7 +39,7 @@ export class HTMLRenderer implements Renderer {
 		elem!.style.top = position.y + this.units;
 		elem!.style.left = position.x + this.units;
 	}
-	// eslint-disable-next-line @typescript-eslint/ban-types
+
 	setInterval(fn: Function, ms: number) {
 		this.intervalId = setInterval(fn, ms);
 	}
