@@ -54,20 +54,4 @@ export class Paddle {
 		);
 		this.renderer.move(this.name, this._position);
 	}
-
-	isColliding(pos: vector, isLeft: boolean): boolean {
-		if (
-			!isBetween(
-				pos.y,
-				this.position.y - this.height / 2,
-				this.position.y + this.height / 2
-			)
-		)
-			return false;
-		if (isLeft) console.log(pos.x, this.position.x);
-		if (isLeft && pos.x < this.position.x + this.width) return true;
-		else if (!isLeft && pos.x > this.position.x - this.width / 2) return true;
-
-		return false;
-	}
 }
