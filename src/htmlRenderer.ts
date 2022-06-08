@@ -12,12 +12,13 @@ export class HTMLRenderer implements Renderer {
 	map = new Map<string, element>();
 	intervalId = 0;
 	htmlSpace = document.body;
-	units = "vh";
+	units = "px";
 	debug: boolean;
 
 	constructor(debug = false) {
 		this.debug = debug;
 		this.htmlSpace.style.height = "100vh";
+		this.htmlSpace.style.margin = "0";
 	}
 
 	make(name: string, type: objTypes, height: number, width: number): void {
@@ -38,8 +39,8 @@ export class HTMLRenderer implements Renderer {
 		const obj = this.map.get(name);
 		const elem = obj?.html;
 		if (!elem) return;
-		elem.style.top = position.y + this.units;
-		elem.style.left = position.x + this.units;
+		elem.style.top = this.convertToPx(position.y);
+		elem.style.left = this.convertToPx(position.x);
 		if (this.debug) elem.innerText = position.toString();
 	}
 
@@ -60,6 +61,10 @@ export class HTMLRenderer implements Renderer {
 		];
 	}
 
+	convertToPx(n: number): string {
+		return n * 10 + "px";
+	}
+
 	makeAbsDiv() {
 		const elem = document.createElement("div");
 		elem.style.backgroundColor = "white";
@@ -70,16 +75,16 @@ export class HTMLRenderer implements Renderer {
 	makeBall(height: number, width: number): HTMLElement {
 		const elem = this.makeAbsDiv();
 		elem.style.borderRadius = "50%";
-		elem.style.height = height + this.units;
-		elem.style.width = width + this.units;
+		elem.style.height = this.convertToPx(height);
+		elem.style.width = this.convertToPx(width);
 		return elem;
 	}
 
 	makePaddle(height: number, width: number): HTMLElement {
 		const elem = this.makeAbsDiv();
-		elem.style.borderRadius = "2%";
-		elem.style.height = height + this.units;
-		elem.style.width = width + this.units;
+		elem.style.borderRadius = "5%";
+		elem.style.height = this.convertToPx(height);
+		elem.style.width = this.convertToPx(width);
 		return elem;
 	}
 }
