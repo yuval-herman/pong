@@ -6,6 +6,8 @@ type element = {
 	name: string;
 	type: objTypes;
 	html: HTMLElement;
+	height: number;
+	width: number;
 };
 
 export class HTMLRenderer implements Renderer {
@@ -31,6 +33,8 @@ export class HTMLRenderer implements Renderer {
 			name: name,
 			type: type,
 			html: htmlElement,
+			height: height,
+			width: width,
 		}); // no check for same name elements TODO FIXME
 
 		this.htmlSpace.appendChild(htmlElement);
@@ -39,9 +43,9 @@ export class HTMLRenderer implements Renderer {
 		const obj = this.map.get(name);
 		const elem = obj?.html;
 		if (!elem) return;
-		elem.style.top = this.convertToPx(position.y);
-		elem.style.left = this.convertToPx(position.x);
-		if (this.debug) elem.innerText = position.toString();
+		elem.style.top = this.convertToPx(position.y - obj.height / 2);
+		elem.style.left = this.convertToPx(position.x - obj.width / 2);
+		if (this.debug) elem.innerText = String(position.y - obj.height / 2);
 	}
 
 	setInterval(fn: Function, ms: number) {
