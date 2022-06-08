@@ -13,79 +13,79 @@ const field = renderer.getField();
 
 const ball = new Ball(field[1].div(2), field, renderer);
 const lPaddle = new Paddle(
-  new vector(30, field[1].y / 2),
-  10,
-  3,
-  3,
-  "lPaddle",
-  field,
-  renderer
+	new vector(30, field[1].y / 2),
+	10,
+	3,
+	3,
+	"lPaddle",
+	field,
+	renderer
 );
 const rPaddle = new Paddle(
-  new vector(field[1].x - 30, field[1].y / 2),
-  10,
-  3,
-  3,
-  "rPaddle",
-  field,
-  renderer
+	new vector(field[1].x - 30, field[1].y / 2),
+	10,
+	3,
+	3,
+	"rPaddle",
+	field,
+	renderer
 );
 const game = new Game(ball, lPaddle, rPaddle, renderer);
 
 // this will not be the same
 
 window.addEventListener("keydown", (e) => {
-  switch (e.code) {
-    case "ArrowUp":
-      game.rPaddleMove = -1;
-      break;
+	switch (e.code) {
+		case "ArrowUp":
+			game.rPaddleMove = -1;
+			break;
 
-    case "ArrowDown":
-      game.rPaddleMove = 1;
-      break;
+		case "ArrowDown":
+			game.rPaddleMove = 1;
+			break;
 
-    case "KeyW":
-      game.lPaddleMove = -1;
-      break;
+		case "KeyW":
+			game.lPaddleMove = -1;
+			break;
 
-    case "KeyS":
-      game.lPaddleMove = 1;
-      break;
+		case "KeyS":
+			game.lPaddleMove = 1;
+			break;
 
-    default:
-      break;
-  }
+		default:
+			break;
+	}
 });
 
 window.addEventListener("keyup", (e) => {
-  switch (e.code) {
-    case "ArrowUp":
-      game.rPaddleMove = 0;
-      break;
+	switch (e.code) {
+		case "ArrowUp":
+			game.rPaddleMove = 0;
+			break;
 
-    case "ArrowDown":
-      game.rPaddleMove = 0;
-      break;
+		case "ArrowDown":
+			game.rPaddleMove = 0;
+			break;
 
-    case "KeyW":
-      game.lPaddleMove = 0;
-      break;
+		case "KeyW":
+			game.lPaddleMove = 0;
+			break;
 
-    case "KeyS":
-      game.lPaddleMove = 0;
-      break;
+		case "KeyS":
+			game.lPaddleMove = 0;
+			break;
 
-    default:
-      break;
-  }
+		default:
+			break;
+	}
 });
 
 // game.start((1 / 60) * 1000);
 
 document
-  .getElementById("btn_stop")
-  ?.addEventListener("click", () => game.stop());
+	.getElementById("btn_stop")
+	?.addEventListener("click", () => game.stop());
 
 document
-  .getElementById("btn_start")
-  ?.addEventListener("click", () => game.start((1 / 30) * 1000));
+	.getElementById("btn_start")
+	?.addEventListener("click", () => game.start((1 / 30) * 1000));
