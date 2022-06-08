@@ -45,19 +45,12 @@ export class Game {
 	}
 
 	handlePaddleCollision() {
-		// if (isInside(this.ball.position, this.computeBox(this.lPaddle))) {
-		//   this.ball.dirForce.x *= -1;
-		// }
-		// console.log(this.lPaddle.position.x, this.ball.position);
 		if (
-			this.lPaddle.isColliding(this.ball.position, true) ||
-			this.rPaddle.isColliding(this.ball.position, false)
-		)
+			isInside(this.ball.position, this.computeBox(this.lPaddle)) ||
+			isInside(this.ball.position, this.computeBox(this.rPaddle))
+		) {
 			this.ball.dirForce.x *= -1;
-		// if (
-		//   this.ball.position.x < this.lPaddle.position.x + this.lPaddle.width ||
-		//   this.ball.position.x > this.rPaddle.position.x - this.rPaddle.width
-		// )
+		}
 	}
 
 	start(ms: number) {
