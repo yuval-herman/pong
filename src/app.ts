@@ -77,10 +77,13 @@ window.addEventListener("keyup", (e) => {
 
 // game.start((1 / 60) * 1000);
 
-document
-	.getElementById("btn_stop")
-	?.addEventListener("click", () => game.stop());
-
-document
-	.getElementById("btn_start")
-	?.addEventListener("click", () => game.start((1 / 30) * 1000));
+document.getElementById("btn_start")?.addEventListener("click", () => {
+	const btn = document.getElementById("btn_start")!;
+	if (btn.innerText === "start") {
+		game.start((1 / 30) * 1000);
+		btn.innerText = "stop";
+	} else {
+		game.stop();
+		btn.innerText = "start";
+	}
+});
