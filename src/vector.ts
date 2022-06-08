@@ -6,8 +6,14 @@ export class vector {
 		this.y = y;
 	}
 
-	add(v: vector) {
-		return new vector(this.x + v.x, this.y + v.y);
+	add(v: vector | number) {
+		if (typeof v === "number") return new vector(this.x + v, this.y + v);
+		else return new vector(this.x + v.x, this.y + v.y);
+	}
+
+	sub(v: vector | number) {
+		if (typeof v === "number") return new vector(this.x - v, this.y - v);
+		else return new vector(this.x - v.x, this.y - v.y);
 	}
 
 	div(num: number) {
