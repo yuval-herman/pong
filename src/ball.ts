@@ -1,4 +1,4 @@
-import { Box, isBetween, isInside } from "./helpers";
+import { Box, isBetween, isInside, shrinkBox } from "./helpers";
 import { objTypes, Renderer as Renderer } from "./renderer";
 import { vector } from "./vector";
 
@@ -30,19 +30,20 @@ export class Ball {
 	moveByForce(dirForce: vector = this.dirForce) {
 		this.dirForce = dirForce;
 		const newPos = this.position.add(dirForce);
-		if (isInside(newPos, this.box)) {
+		const shrunkBox = shrinkBox(this.box, this.radius / 2);
+		if (isInside(newPos, shrunkBox)) {
 			this.position = newPos;
 		} else {
-			if (this.handleCollision(newPos)) return;
+			if (this.handleCollision(newPos, shrunkBox)) return;
 			this.moveByForce();
 		}
 	}
 
-	handleCollision(pos: vector = this.position) {
-		if (!isBetween(pos.x, this.box[0].x, this.box[1].x)) {
+	handleCollision(pos: vector = this.position, box = this.box) {
+		if (!isBetween(pos.x, box[0].x, box[1].x)) {
 			// collision in vertical axis
 			this.dirForce.x *= -1;
-		} else if (!isBetween(pos.y, this.box[0].y, this.box[1].y)) {
+		} else if (!isBetween(pos.y, box[0].y, box[1].y)) {
 			// collision in horizontal axis
 			this.dirForce.y *= -1;
 		}
