@@ -49,8 +49,8 @@ export class Paddle {
 	moveY(amount: number) {
 		const newYPos = this.position.y + amount;
 		this.position.y = Math.min(
-			Math.max(newYPos, this.moveLimit),
-			this.box[1].y - this.moveLimit
+			Math.max(newYPos, this.moveLimit + this.height / 2),
+			this.box[1].y - (this.moveLimit + this.height / 2)
 		);
 		this.renderer.move(this.name, this._position);
 	}
@@ -65,9 +65,6 @@ export class Paddle {
 		)
 			return false;
 		if (isLeft) console.log(pos.x, this.position.x);
-
-		// console.log(pos.x < this.position.x + this.width);
-		// console.log(isLeft && pos.x < this.position.x + this.width);
 		if (isLeft && pos.x < this.position.x + this.width) return true;
 		else if (!isLeft && pos.x > this.position.x - this.width / 2) return true;
 
