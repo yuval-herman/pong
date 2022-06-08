@@ -35,7 +35,6 @@ export class Paddle {
 			properties.width
 		);
 		this.renderer.move(this.name, this._position);
-		console.log(this._position, this.height, this.width);
 	}
 
 	public get position(): vector {
@@ -49,19 +48,10 @@ export class Paddle {
 
 	moveY(amount: number) {
 		const newYPos = this.position.y + amount;
-		if (
-			isBetween(
-				newYPos,
-				this.box[0].y + this.moveLimit,
-				this.box[1].y - this.moveLimit
-			)
-		) {
-			this.position.y = newYPos;
-		} else if (newYPos < 0) {
-			this.position.y = this.box[0].y + this.moveLimit;
-		} else {
-			this.position.y = this.box[1].y - this.moveLimit;
-		}
+		this.position.y = Math.min(
+			Math.max(newYPos, this.moveLimit),
+			this.box[1].y - this.moveLimit
+		);
 		this.renderer.move(this.name, this._position);
 	}
 
