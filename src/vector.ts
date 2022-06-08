@@ -13,4 +13,8 @@ export class vector {
 	div(num: number) {
 		return new vector(this.x / num, this.y / num);
 	}
+
+	toString() {
+		return `(${this.x}, ${this.y})`;
+	}
 }

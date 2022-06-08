@@ -13,8 +13,10 @@ export class HTMLRenderer implements Renderer {
 	intervalId = 0;
 	htmlSpace = document.body;
 	units = "vh";
+	debug: boolean;
 
-	constructor() {
+	constructor(debug = false) {
+		this.debug = debug;
 		this.htmlSpace.style.height = "100vh";
 	}
 
@@ -35,9 +37,10 @@ export class HTMLRenderer implements Renderer {
 	move(name: string, position: vector): void {
 		const obj = this.map.get(name);
 		const elem = obj?.html;
-
-		elem!.style.top = position.y + this.units;
-		elem!.style.left = position.x + this.units;
+		if (!elem) return;
+		elem.style.top = position.y + this.units;
+		elem.style.left = position.x + this.units;
+		if (this.debug) elem.innerText = position.toString();
 	}
 
 	setInterval(fn: Function, ms: number) {
@@ -57,10 +60,15 @@ export class HTMLRenderer implements Renderer {
 		];
 	}
 
-	makeBall(height: number, width: number): HTMLElement {
+	makeAbsDiv() {
 		const elem = document.createElement("div");
 		elem.style.backgroundColor = "white";
 		elem.style.position = "absolute";
+		return elem;
+	}
+
+	makeBall(height: number, width: number): HTMLElement {
+		const elem = this.makeAbsDiv();
 		elem.style.borderRadius = "50%";
 		elem.style.height = height + this.units;
 		elem.style.width = width + this.units;
@@ -68,9 +76,7 @@ export class HTMLRenderer implements Renderer {
 	}
 
 	makePaddle(height: number, width: number): HTMLElement {
-		const elem = document.createElement("div");
-		elem.style.backgroundColor = "white";
-		elem.style.position = "absolute";
+		const elem = this.makeAbsDiv();
 		elem.style.borderRadius = "2%";
 		elem.style.height = height + this.units;
 		elem.style.width = width + this.units;

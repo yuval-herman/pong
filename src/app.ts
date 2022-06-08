@@ -1,12 +1,10 @@
 import { Ball } from "./ball";
 import { Game } from "./game";
 import { Paddle } from "./paddle";
-import { dummyRenderer, objTypes, Renderer } from "./renderer";
 import { vector } from "./vector";
-import { Box } from "./helpers";
 import { HTMLRenderer } from "./htmlRenderer";
 
-const renderer = new HTMLRenderer();
+const renderer = new HTMLRenderer(true);
 
 // this will always be the same
 const field = renderer.getField();
