@@ -12,23 +12,20 @@ const renderer = new HTMLRenderer();
 const field = renderer.getField();
 
 const ball = new Ball(field[1].div(2), field, renderer);
+const paddleProps = { height: 10, width: 3, moveLimit: 3 };
 const lPaddle = new Paddle(
 	new vector(30, field[1].y / 2),
-	10,
-	3,
-	3,
-	"lPaddle",
 	field,
-	renderer
+	renderer,
+	"lPaddle",
+	paddleProps
 );
 const rPaddle = new Paddle(
 	new vector(field[1].x - 30, field[1].y / 2),
-	10,
-	3,
-	3,
-	"rPaddle",
 	field,
-	renderer
+	renderer,
+	"rPaddle",
+	paddleProps
 );
 const game = new Game(ball, lPaddle, rPaddle, renderer);
 

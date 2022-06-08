@@ -12,21 +12,28 @@ export class Paddle {
 	moveLimit: number;
 	constructor(
 		position: vector,
-		height: number,
-		width: number,
-		moveLimit: number,
-		name: string,
 		box: Box,
-		renderer: Renderer
+		renderer: Renderer,
+		name: string,
+		properties: {
+			height: number;
+			width: number;
+			moveLimit: number;
+		}
 	) {
 		this._position = position;
-		this.height = height;
-		this.width = width;
+		this.height = properties.height;
+		this.width = properties.width;
 		this.name = name;
 		this.box = box;
-		this.moveLimit = moveLimit;
+		this.moveLimit = properties.moveLimit;
 		this.renderer = renderer;
-		this.renderer.make(this.name, objTypes.paddle, height, width);
+		this.renderer.make(
+			this.name,
+			objTypes.paddle,
+			properties.height,
+			properties.width
+		);
 		this.renderer.move(this.name, this._position);
 		console.log(this._position, this.height, this.width);
 	}
