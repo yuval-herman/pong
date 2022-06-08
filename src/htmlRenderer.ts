@@ -45,7 +45,7 @@ export class HTMLRenderer implements Renderer {
 		if (!elem) return;
 		elem.style.top = this.convertToPx(position.y - obj.height / 2);
 		elem.style.left = this.convertToPx(position.x - obj.width / 2);
-		if (this.debug) elem.innerText = String(position.y - obj.height / 2);
+		if (this.debug) elem.innerText = String(position.y);
 	}
 
 	setInterval(fn: Function, ms: number) {
