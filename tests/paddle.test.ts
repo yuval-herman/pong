@@ -11,7 +11,7 @@ const paddle = new Paddle(
 	paddleProps
 );
 
-describe.skip("test paddle movements", () => {
+describe("test paddle movements", () => {
 	it("test manual position change", () => {
 		expect(paddle.position).toStrictEqual(new vector(0, 0));
 		paddle.position = new vector(10, 10);
@@ -23,10 +23,8 @@ describe.skip("test paddle movements", () => {
 	});
 	it("test limits are working", () => {
 		paddle.moveY(-10);
-		expect(paddle.position).toStrictEqual(new vector(10, paddle.moveLimit));
+		expect(paddle.position).toStrictEqual(new vector(10, 3));
 		paddle.moveY(20);
-		expect(paddle.position).toStrictEqual(
-			new vector(10, 10 - paddle.moveLimit)
-		);
+		expect(paddle.position).toStrictEqual(new vector(10, 7));
 	});
 });

@@ -34,8 +34,7 @@ export class Ball {
 		if (isInside(newPos, shrunkBox)) {
 			this.position = newPos;
 		} else {
-			if (this.handleCollision(newPos, shrunkBox)) return;
-			this.moveByForce();
+			if (this.handleCollision(newPos, shrunkBox)) this.moveByForce();
 		}
 	}
 
